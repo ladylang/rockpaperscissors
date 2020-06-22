@@ -20,36 +20,53 @@ function computerPlay() {
     }
 }
 
-let computerSelection = computerPlay()
-console.log("Computer picked " + computerSelection)
-
-
-let playerAnswer=prompt("Pick rock, paper, or scissors.")
-let playerSelection = playerAnswer.toLowerCase()
-
-console.log("You picked " + playerSelection)
 
 
 function playRound(playerSelection, computerSelection) {
     if (playerSelection==computerSelection) {
         return "It's a tie";
     } else if (playerSelection=="rock" && computerSelection=="scissors") {
-        return "You win! Rock beats scissors.";
+        playerScore++
+        return "You win! Rock beats scissors."; 
     } else if (playerSelection=="paper" && computerSelection=="rock") {
+        playerScore++
         return "You win! Paper beats rock.";
     } else if (playerSelection=="scissors" && computerSelection=="paper") {
+        playerScore++
         return "You win! Scissors beats paper.";
     } else if (playerSelection=="rock" && computerSelection=="paper") {
+        computerScore++
         return "You lose! Paper beats rock.";
     } else if (playerSelection=="paper" && computerSelection=="scissors") {
+        computerScore++
         return "You lose! Scissors beats paper.";
     } else if (playerSelection=="scissors" && computerSelection=="rock") {
+        computerScore++
         return "You lose! Rock beats scissors.";
     }
 }
 
-console.log(playRound(playerSelection,computerSelection))
+let playerScore = 0
+let computerScore = 0
 
+function game() {
+    let totalRounds = prompt("How many rounds would you like to play?")
+    for (currentRound=1; currentRound<=totalRounds; currentRound++) {
+        console.log(`Round ${currentRound}`)
+        let computerSelection = computerPlay()
+        let playerSelection = prompt("Pick rock, paper, or scissors.").toLowerCase()
+        console.log(playRound(playerSelection,computerSelection))
+        console.log(`Current score is player:${playerScore} and computer:${computerScore}.`)
+    }
+    if (playerScore==computerScore) {
+        return `Final score is player:${playerScore} and computer:${computerScore}. It's a tie!`
+    } else if (playerScore>computerScore) {
+        return `Final score is player:${playerScore} and computer:${computerScore}. YOU WIN!!`
+    } else if (playerScore<computerScore) {
+        return `Final score is player:${playerScore} and computer:${computerScore}. You lose. Maybe next time.`
+    }
+}
+console.log(game())
 
 
 </script>
