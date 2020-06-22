@@ -1,1 +1,1 @@
-# rockpaperscissors
+Practice javascript project from The Odin Project called Rock Paper Scissors. 
