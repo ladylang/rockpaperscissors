@@ -6,12 +6,15 @@
 */
 
 
-const startBtn=document.getElementById('startBtn').addeventListener('click', game());
-const rockBtn=document.getElementById('rockBtn').addeventListener('click', );
-const paperBtn=document.getElementById('paperBtn').addeventListener('click', );
-const scissorsBtn=document.getElementById('scissorsBtn').addeventListener('click', );
+const startBtn=document.getElementById('startBtn');
+const rockBtn=document.getElementById('rockBtn');
+const paperBtn=document.getElementById('paperBtn');
+const scissorsBtn=document.getElementById('scissorsBtn');
+const gameBox = document.querySelector('gameBox')
 
-
+let playerScore = 0
+let computerScore = 0
+let currentRound = 1
 
 function computerPlay() {
     let randomNumber = Math.floor(Math.random()*(3)+1) //random # from 1 to 3 inclusive (#*(max-min+1)+1)
@@ -50,15 +53,14 @@ function playRound(playerSelection, computerSelection) {
     }
 }
 
-let playerScore = 0
-let computerScore = 0
+
 
 function game() {
     let totalRounds = prompt("How many rounds would you like to play?")
-    for (currentRound=1; currentRound<=totalRounds; currentRound++) {
+    for (; currentRound<=totalRounds; currentRound++) {
         console.log(`Round ${currentRound}`)
         let computerSelection = computerPlay()
-        let playerSelection = document.querySelector(playerBtn)//needs to be on btn click
+        let playerSelection = document.querySelector('playerBtn')//needs to be on btn click
         console.log(playRound(playerSelection,computerSelection))
         console.log(`Current score is player:${playerScore} and computer:${computerScore}.`)
     }
@@ -72,7 +74,11 @@ function game() {
 }
 
 
-const finalScore=document.querySelector(finalScore)
-finalScore.textContent=`The Final Score is`
+const currentRoundDisplay=document.querySelector('#currentRoundDisplay')
+currentRoundDisplay.textContent=`Round ${currentRound}`
 
-startBtn.addeventListener('click', game());
+const finalScoreDisplay=document.querySelector('#finalScoreDisplay')
+finalScoreDisplay.textContent=`The Final Score is player:${playerScore} vs computer:${computerScore}.`
+
+
+startBtn.addEventListener('click', game);
