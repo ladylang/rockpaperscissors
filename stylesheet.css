@@ -1,0 +1,46 @@
+#title {
+    width: 100%;
+    text-align: center;
+    color: blueviolet;
+    border: blue;
+}
+
+
+#gameBox {
+    
+    text-align: center;
+    border: lightseagreen;
+}
+
+#startBox {
+    margin: 10px 10px;
+}
+
+#startBtn{
+    background-color: rgb(211, 84, 84);
+    color: white;
+}
+
+#signature {
+    text-align: center;
+}
+
+p {
+    text-align: center;
+}
+
+footer {
+    width: 100%;
+    position: fixed; 
+    bottom: 0;
+    background-color: black;
+    color: rgb(252, 224, 182);
+}
+
+
+body {
+    display: block;
+    margin: 0;
+    height: 100%;
+    width: auto;
+}
