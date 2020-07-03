@@ -7,10 +7,11 @@
 
 
 const startBtn=document.getElementById('startBtn');
-const rockBtn=document.getElementById('rockBtn');
-const paperBtn=document.getElementById('paperBtn');
-const scissorsBtn=document.getElementById('scissorsBtn');
-const gameBox = document.querySelector('gameBox')
+const rockBtn=document.getElementById('rock');
+const paperBtn=document.getElementById('paper');
+const scissorsBtn=document.getElementById('scissors');
+const playerBtn=document.querySelector('playerBtn');
+const gameBox = document.querySelector('gameBox');
 
 let playerScore = 0
 let computerScore = 0
@@ -25,12 +26,34 @@ function computerPlay() {
     } else if (randomNumber==3) {
         return "scissors";
     }
-}
+};
+
+
+    rockBtn.addEventListener('click', function(e){
+        playerSelection = 'rock';
+        console.log(playerSelection)
+        let computerSelection = computerPlay()
+        document.getElementById('finalScoreDisplay').innerHTML = playRound(playerSelection,computerSelection);
+    });
+    paperBtn.addEventListener('click', function(e){
+        playerSelection = 'paper';
+        console.log(playerSelection);
+        let computerSelection = computerPlay()
+        document.getElementById('finalScoreDisplay').innerHTML = playRound(playerSelection,computerSelection);
+    });
+    scissorsBtn.addEventListener('click', function(e){
+        playerSelection = 'scissors';
+        console.log(playerSelection);
+        let computerSelection = computerPlay()
+        document.getElementById('finalScoreDisplay').innerHTML = playRound(playerSelection,computerSelection);
+    }); 
 
 
 
 function playRound(playerSelection, computerSelection) {
-    if (playerSelection==computerSelection) {
+    console.log(playerSelection, computerSelection)
+    
+    if (playerSelection===computerSelection) {
         return "It's a tie";
     } else if (playerSelection=="rock" && computerSelection=="scissors") {
         playerScore++
@@ -51,19 +74,18 @@ function playRound(playerSelection, computerSelection) {
         computerScore++
         return "You lose! Rock beats scissors.";
     }
-}
+};
 
 
-
+/* code for looping the game. still doesn't work 
 function game() {
-    let totalRounds = prompt("How many rounds would you like to play?")
-    for (; currentRound<=totalRounds; currentRound++) {
+    for (; currentRound<=totalRounds;currentRound++) {
         console.log(`Round ${currentRound}`)
         let computerSelection = computerPlay()
-        let playerSelection = document.querySelector('playerBtn')//needs to be on btn click
-        console.log(playRound(playerSelection,computerSelection))
-        console.log(`Current score is player:${playerScore} and computer:${computerScore}.`)
-    }
+        
+        console.log(`${computerSelection},${playerSelection}`)
+    };
+
     if (playerScore==computerScore) {
         return `Final score is player:${playerScore} and computer:${computerScore}. It's a tie!`
     } else if (playerScore>computerScore) {
@@ -71,8 +93,7 @@ function game() {
     } else if (playerScore<computerScore) {
         return `Final score is player:${playerScore} and computer:${computerScore}. You lose. Maybe next time.`
     }
-}
-
+};
 
 const currentRoundDisplay=document.querySelector('#currentRoundDisplay')
 currentRoundDisplay.textContent=`Round ${currentRound}`
@@ -81,4 +102,8 @@ const finalScoreDisplay=document.querySelector('#finalScoreDisplay')
 finalScoreDisplay.textContent=`The Final Score is player:${playerScore} vs computer:${computerScore}.`
 
 
-startBtn.addEventListener('click', game);
+startBtn.addEventListener('click', function(e){
+    let totalRounds = prompt("How many rounds would you like to play?")
+});
+
+*/
