@@ -16,6 +16,7 @@ const gameBox = document.querySelector('gameBox');
 let playerScore = 0
 let computerScore = 0
 let currentRound = 1
+let totalRounds = 5
 
 function computerPlay() {
     let randomNumber = Math.floor(Math.random()*(3)+1) //random # from 1 to 3 inclusive (#*(max-min+1)+1)
@@ -29,30 +30,39 @@ function computerPlay() {
 };
 
 
-    rockBtn.addEventListener('click', function(e){
-        playerSelection = 'rock';
-        console.log(playerSelection)
-        let computerSelection = computerPlay()
-        document.getElementById('finalScoreDisplay').innerHTML = playRound(playerSelection,computerSelection);
-    });
-    paperBtn.addEventListener('click', function(e){
-        playerSelection = 'paper';
-        console.log(playerSelection);
-        let computerSelection = computerPlay()
-        document.getElementById('finalScoreDisplay').innerHTML = playRound(playerSelection,computerSelection);
-    });
-    scissorsBtn.addEventListener('click', function(e){
-        playerSelection = 'scissors';
-        console.log(playerSelection);
-        let computerSelection = computerPlay()
-        document.getElementById('finalScoreDisplay').innerHTML = playRound(playerSelection,computerSelection);
-    }); 
+startBtn.addEventListener('click', function(e){
+    totalRounds = prompt("How many rounds would you like to play?")
+    e.target.style.background = 'grey';
+});
 
+rockBtn.addEventListener('click', function(e){
+    playerSelection = 'rock';
+    console.log(playerSelection)
+    let computerSelection = computerPlay()
+    document.getElementById('currentScoreDisplay').innerHTML = playRound(playerSelection,computerSelection);
+    gameRound();
+});
+paperBtn.addEventListener('click', function(e){
+    playerSelection = 'paper';
+    console.log(playerSelection);
+    let computerSelection = computerPlay()
+    document.getElementById('currentScoreDisplay').innerHTML = playRound(playerSelection,computerSelection);
+    gameRound(currentRound);
+});
+scissorsBtn.addEventListener('click', function(e){
+    playerSelection = 'scissors';
+    console.log(playerSelection);
+    let computerSelection = computerPlay()
+    document.getElementById('currentScoreDisplay').innerHTML = playRound(playerSelection,computerSelection);
+    gameRound(currentRound);
+}); 
+
+const currentRoundDisplay=document.querySelector('#currentRoundDisplay')
+//currentRoundDisplay.textContent=`Round ${currentRound}`
 
 
 function playRound(playerSelection, computerSelection) {
     console.log(playerSelection, computerSelection)
-    
     if (playerSelection===computerSelection) {
         return "It's a tie";
     } else if (playerSelection=="rock" && computerSelection=="scissors") {
@@ -74,36 +84,28 @@ function playRound(playerSelection, computerSelection) {
         computerScore++
         return "You lose! Rock beats scissors.";
     }
+
 };
-
-
-/* code for looping the game. still doesn't work 
-function game() {
-    for (; currentRound<=totalRounds;currentRound++) {
-        console.log(`Round ${currentRound}`)
-        let computerSelection = computerPlay()
-        
-        console.log(`${computerSelection},${playerSelection}`)
-    };
-
-    if (playerScore==computerScore) {
-        return `Final score is player:${playerScore} and computer:${computerScore}. It's a tie!`
-    } else if (playerScore>computerScore) {
-        return `Final score is player:${playerScore} and computer:${computerScore}. YOU WIN!!`
-    } else if (playerScore<computerScore) {
-        return `Final score is player:${playerScore} and computer:${computerScore}. You lose. Maybe next time.`
-    }
-};
-
-const currentRoundDisplay=document.querySelector('#currentRoundDisplay')
-currentRoundDisplay.textContent=`Round ${currentRound}`
 
 const finalScoreDisplay=document.querySelector('#finalScoreDisplay')
-finalScoreDisplay.textContent=`The Final Score is player:${playerScore} vs computer:${computerScore}.`
+//finalScoreDisplay.textContent=`The Final Score is player:${playerScore} vs computer:${computerScore}.`
 
+function gameRound() {
+    if (currentRound<totalRounds) {
+        console.log(`Round ${currentRound}`)
+        currentRoundDisplay.textContent=`Round ${currentRound}`
+        currentRound++
+        return finalScoreDisplay.textContent=`The current score is player:${playerScore} vs computer:${computerScore}.`
+    } else {
+        currentRoundDisplay.textContent=`Round ${currentRound}`
+        if (playerScore==computerScore) {
+        return finalScoreDisplay.textContent=`The final score is player:${playerScore} vs computer:${computerScore}. It's a tie!`
+        } else if (playerScore>computerScore) {
+        return finalScoreDisplay.textContent=`The final score is player:${playerScore} and computer:${computerScore}. YOU WIN!!`
+        } else if (playerScore<computerScore) {
+        return finalScoreDisplay.textContent=`The final score is player:${playerScore} and computer:${computerScore}. You lose. Maybe next time.`
+    }
+    }
 
-startBtn.addEventListener('click', function(e){
-    let totalRounds = prompt("How many rounds would you like to play?")
-});
-
-*/
+    
+};
